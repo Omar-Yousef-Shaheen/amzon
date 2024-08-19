@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/amzon/static/css/main.f4049dec.css",
-    "main.js": "/amzon/static/js/main.def59751.js",
+    "main.js": "/amzon/static/js/main.8be72ef2.js",
     "static/media/2.png": "/amzon/static/media/2.0f5bc477d58244e1dbf1.png",
     "static/media/6.png": "/amzon/static/media/6.ff4f8692e4e7bb08800a.png",
     "static/media/BG.jpeg": "/amzon/static/media/BG.395025f504aa8ff58f06.jpeg",
@@ -16,10 +16,10 @@
     "static/media/empty-cart.png": "/amzon/static/media/empty-cart.3fb2f85a27ef1e5245ad.png",
     "index.html": "/amzon/index.html",
     "main.f4049dec.css.map": "/amzon/static/css/main.f4049dec.css.map",
-    "main.def59751.js.map": "/amzon/static/js/main.def59751.js.map"
+    "main.8be72ef2.js.map": "/amzon/static/js/main.8be72ef2.js.map"
   },
   "entrypoints": [
     "static/css/main.f4049dec.css",
-    "static/js/main.def59751.js"
+    "static/js/main.8be72ef2.js"
   ]
 }

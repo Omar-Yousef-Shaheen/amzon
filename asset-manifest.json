@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/amzon/static/css/main.f4049dec.css",
+    "main.js": "/amzon/static/js/main.def59751.js",
+    "static/media/2.png": "/amzon/static/media/2.0f5bc477d58244e1dbf1.png",
+    "static/media/6.png": "/amzon/static/media/6.ff4f8692e4e7bb08800a.png",
+    "static/media/BG.jpeg": "/amzon/static/media/BG.395025f504aa8ff58f06.jpeg",
+    "static/media/1.png": "/amzon/static/media/1.f039a27703de29c4ec4c.png",
+    "static/media/5.png": "/amzon/static/media/5.f6c0dff37b8454f105e6.png",
+    "static/media/3.png": "/amzon/static/media/3.0f5c91bd9cf7ac7b382f.png",
+    "static/media/login-logo.png": "/amzon/static/media/login-logo.808bf88ddaba0301ceca.png",
+    "static/media/header-logo.png": "/amzon/static/media/header-logo.1c9be0b254d3ff1dc9e9.png",
+    "static/media/NotFound.png": "/amzon/static/media/NotFound.e7ce072eb7c596f0fabf.png",
+    "static/media/4.png": "/amzon/static/media/4.627bf584cf285f25e5c2.png",
+    "static/media/checkoutAd.jpg": "/amzon/static/media/checkoutAd.b842b1e4bb0cc75ce652.jpg",
+    "static/media/empty-cart.png": "/amzon/static/media/empty-cart.3fb2f85a27ef1e5245ad.png",
+    "index.html": "/amzon/index.html",
+    "main.f4049dec.css.map": "/amzon/static/css/main.f4049dec.css.map",
+    "main.def59751.js.map": "/amzon/static/js/main.def59751.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f4049dec.css",
+    "static/js/main.def59751.js"
+  ]
+}

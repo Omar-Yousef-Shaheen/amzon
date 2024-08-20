@@ -3,10 +3,32 @@ import { getTotalPrice, useAuth } from "../Context/GlobalState";
 import { Link, useNavigate } from "react-router-dom";
 import CheckOutProduct from "./CheckOutProduct";
 import { NumericFormat } from "react-number-format";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import {
+  CardCvcElement,
+  CardElement,
+  CardExpiryElement,
+  CardNumberElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
 import { axiosInstance } from "./axios";
+import { doc, setDoc } from "firebase/firestore";
+import { dataBase } from "../firebase";
 
 const Payment = () => {
+  const options = {
+    style: {
+      base: {
+        color: "#32325d",
+        fontSize: "20px",
+
+        "::placeholder": {
+          color: "#aab7c4",
+        },
+      },
+    },
+    hidePostalCode: true,
+  };
   const { basket, user, dispatch } = useAuth();
   const navigate = useNavigate();
   const [clientSecret, setClientSecret] = useState();
@@ -22,13 +44,14 @@ const Payment = () => {
         method: "post",
         url: `/payments/create?total=${getTotalPrice(basket) * 100} `,
       });
-       setClientSecret(response.data.clientSecret);
+      setClientSecret(response.data.clientSecret);
       return response;
     };
     getClientSecret();
   }, [basket]);
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setProcessing(true);
     const payload = await stripe
       .confirmCardPayment(clientSecret, {
@@ -36,7 +59,13 @@ const Payment = () => {
           card: elements.getElement(CardElement),
         },
       })
-      .then((paymentIntent) => {
+      .then(({paymentIntent}) => {
+        const ref = doc(dataBase , "users" , user?.uid , "orders" , paymentIntent.id )
+        setDoc(ref , {
+          basket : basket ,
+          amount : paymentIntent.amount,
+          created : paymentIntent.created,
+        })
         setSucceeded(true);
         setError(null);
         setProcessing(false);
@@ -52,7 +81,7 @@ const Payment = () => {
   };
   return (
     <>
-      <div className="pt-[70px]  flex flex-col items-center   ">
+      {/* <div className="pt-[70px]  flex flex-col items-center   ">
         <div className="bg-gray-300 p-[26px] rounded-lg ">
           <h2 className="text-slate-800 text-3xl font-bold">
             Check Out :{" "}
@@ -72,51 +101,58 @@ const Payment = () => {
             </span>
           </div>
         </div>
-      </div>
-      <div className="p-8">
-        <h3 className="font-bold text-xl border-b-2 border-gray-400 w-fit pb-5">
-          Review items and delivery :
-        </h3>
-        <div className="bg-white">
-          {basket.map((item) => (
-            <CheckOutProduct
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              image={item.image}
-              price={item.price}
-              rating={item.rating}
-            />
-          ))}
-        </div>
-        <div className="p-8 flex items-center gap-20">
+      </div> */}
+      <div className="pt-[70px]">
+        <div className="p-8">
           <h3 className="font-bold text-xl border-b-2 border-gray-400 w-fit pb-5">
-            Payment Method :
+            Review Items and Delivery :
           </h3>
-          <form onSubmit={handleSubmit}>
-            <div className="">
-              <CardElement className="w-full" onChange={handleChange} />
-              <NumericFormat
-                renderText={(value) => (
-                  <h3 className="text-slate-800 font-bold">
-                    Total Order :<span className="text-black"> {value}</span>
-                  </h3>
-                )}
-                value={getTotalPrice(basket)}
-                displayType="text"
-                prefix="$"
-                thousandSeparator={true}
+          <div className="bg-white">
+            {basket.map((item) => (
+              <CheckOutProduct
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                image={item.image}
+                price={item.price}
+                rating={item.rating}
               />
-              <button
-                disabled={processing || disabled || succeeded}
-                type="submit"
-                className="w-full active:scale-[.9] cursor-pointer  my-auto rounded-md bg-slate-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-all duration-200 disabled:bg-gray-400"
-              >
-                {processing ? "Processing" : "Buy Now"}
-              </button>
-            </div>
-            <div>{error && <h2>{error}</h2>}</div>
-          </form>
+            ))}
+          </div>
+          <div className="mt-8 flex flex-col gap-7">
+            <h3 className="font-bold text-xl border-b-2 border-gray-400 w-fit pb-3">
+              Payment Method :
+            </h3>
+            <form onSubmit={handleSubmit} className="w-full md:w-[50%] m-auto ">
+              <div className="flex flex-col gap-3 bg-white p-8 rounded-md border-y-2 border-gray-400">
+                <CardElement
+                  options={options}
+                  className=""
+                  onChange={handleChange}
+                />
+
+                <NumericFormat
+                  renderText={(value) => (
+                    <h3 className="text-slate-800 font-bold">
+                      Total Order :<span className="text-black"> {value}</span>
+                    </h3>
+                  )}
+                  value={getTotalPrice(basket)}
+                  displayType="text"
+                  prefix="$"
+                  thousandSeparator={true}
+                />
+                <button
+                  disabled={processing || disabled || succeeded}
+                  type="submit"
+                  className="w-full active:scale-[.9] cursor-pointer  my-auto rounded-md bg-slate-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-all duration-200 disabled:bg-gray-400"
+                >
+                  {processing ? "Processing" : "Buy Now"}
+                </button>
+              </div>
+              <div>{error && <h2>{error}</h2>}</div>
+            </form>
+          </div>
         </div>
       </div>
     </>

@@ -122,7 +122,7 @@ const Payment = () => {
             <h3 className="font-bold text-xl border-b-2 border-gray-400 w-fit pb-3">
               Payment Method :
             </h3>
-            <form onSubmit={handleSubmit} className="w-full md:w-[50%] m-auto ">
+            <form onSubmit={handleSubmit} className="w-full  ">
               <div className="flex flex-col gap-3 bg-white p-8 rounded-md border-y-2 border-gray-400">
                 <CardElement
                   options={options}

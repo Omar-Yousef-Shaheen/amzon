@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { getTotalPrice, useAuth } from "../Context/GlobalState";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CheckOutProduct from "./CheckOutProduct";
 import { NumericFormat } from "react-number-format";
-import {
-  CardCvcElement,
-  CardElement,
-  CardExpiryElement,
-  CardNumberElement,
-  useElements,
-  useStripe,
-} from "@stripe/react-stripe-js";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { axiosInstance } from "./axios";
 import { doc, setDoc } from "firebase/firestore";
 import { dataBase } from "../firebase";
@@ -59,13 +52,19 @@ const Payment = () => {
           card: elements.getElement(CardElement),
         },
       })
-      .then(({paymentIntent}) => {
-        const ref = doc(dataBase , "users" , user?.uid , "orders" , paymentIntent.id )
-        setDoc(ref , {
-          basket : basket ,
-          amount : paymentIntent.amount,
-          created : paymentIntent.created,
-        })
+      .then(({ paymentIntent }) => {
+        const ref = doc(
+          dataBase,
+          "users",
+          user?.uid,
+          "orders",
+          paymentIntent.id
+        );
+        setDoc(ref, {
+          basket: basket,
+          amount: paymentIntent.amount,
+          created: paymentIntent.created,
+        });
         setSucceeded(true);
         setError(null);
         setProcessing(false);

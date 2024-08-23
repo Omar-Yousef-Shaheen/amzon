@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CheckOutProduct from "./CheckOutProduct";
 import { NumericFormat } from "react-number-format";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { axiosInstance } from "./axios";
+import axios from "./axios";
 import { doc, setDoc } from "firebase/firestore";
 import { dataBase } from "../firebase";
 
@@ -33,12 +33,12 @@ const Payment = () => {
   const elements = useElements();
   useEffect(() => {
     const getClientSecret = async () => {
-      const response = await axiosInstance({
+      const response = await axios({
         method: "post",
         url: `/payments/create?total=${getTotalPrice(basket) * 100} `,
       });
-      setClientSecret(response.data.clientSecret);
-      return response;
+      console.log(response.data);
+     
     };
     getClientSecret();
   }, [basket]);
@@ -122,7 +122,10 @@ const Payment = () => {
             <h3 className="font-bold text-xl border-b-2 border-gray-400 w-fit pb-3">
               Payment Method :
             </h3>
-            <form onSubmit={handleSubmit} className="w-full  md:w-[50%] md:m-auto  ">
+            <form
+              onSubmit={handleSubmit}
+              className="w-full  md:w-[50%] md:m-auto  "
+            >
               <div className="flex flex-col gap-3 bg-white p-8 rounded-md border-y-2 border-gray-400">
                 <CardElement
                   options={options}

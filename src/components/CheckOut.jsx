@@ -18,8 +18,8 @@ const CheckOut = () => {
         <div>
           <img className="" src={checkImg} alt="Image-CheckOut" />
         </div>
-        <div>
-          <div className="  m-3   border-b-2 border-gray-300 w-fit p-[20px] gap-4 text-xl md:text-5xl font-semibold text-gray-800">
+        <div className="container mx-auto">
+          <div className="  my-3   border-b-2 border-gray-300 w-fit py-[20px] gap-4 text-xl md:text-5xl font-semibold text-gray-800">
             <h2 className="text-slate-800">Cart Shoping:</h2>
             {basket.length ? (
               <button
@@ -32,7 +32,7 @@ const CheckOut = () => {
               ""
             )}
           </div>
-          <div>
+          <div className="bg-white ">
             {basket.length ? (
               basket.map((item, index) => {
                 return (

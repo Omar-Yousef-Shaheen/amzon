@@ -11,12 +11,12 @@ const CheckOutProduct = ({ image, id, price, title, rating }) => {
     });
   };
   return (
-    <div className="mt-[36px] container mx-auto  border-b-2 border-b-gray-300 p-[30px] flex gap-10">
+    <div className="mt-[36px] container mx-auto  border-b-2 border-b-gray-300 p-[30px] flex-col ">
       <div>
         <img className="min-w-[250px] h-[200px] " src={image} alt="Image-Product" />
       </div>
       <div className="flex flex-col gap-4">
-        <p className=" font-semibold ">{title}</p>
+        <p className=" font-semibold mt-5 line-clamp-2 md:line-clamp-none ">{title}</p>
         <h3 className="font-bold text-lg">${price}</h3>
         <span className="flex">
           {" "}

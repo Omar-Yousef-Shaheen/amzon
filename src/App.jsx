@@ -34,50 +34,52 @@ function App() {
   }, []);
 
   return (
-    <div className="app">
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Header />
-              <Home />
-            </>
-          }
-        />
-        <Route
-          path="/checkout"
-          element={
-            <>
-              <Header />
-              <CheckOut />
-            </>
-          }
-        />
-        <Route
-          path="/payment"
-          element={
-            <>
-              <Header />
-              <Elements stripe={stripePromise}>
-                <Payment />
-              </Elements>
-            </>
-          }
-        />
-        <Route path="/login" element={<Login />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route
-          path="*"
-          element={
-            <>
-              <Header />
-              <NotFound />
-            </>
-          }
-        />
-      </Routes>
-    </div>
+    <>
+      <div className="app">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Header />
+                <Home />
+              </>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <>
+                <Header />
+                <CheckOut />
+              </>
+            }
+          />
+          <Route
+            path="/payment"
+            element={
+              <>
+                <Header />
+                <Elements stripe={stripePromise}>
+                  <Payment />
+                </Elements>
+              </>
+            }
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route
+            path="*"
+            element={
+              <>
+                <Header />
+                <NotFound />
+              </>
+            }
+          />
+        </Routes>
+      </div>
+    </>
   );
 }
 

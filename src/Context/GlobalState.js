@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useState } from "react";
 import AppReducer, { initialState } from "./AppReducer";
 
 
@@ -14,9 +14,10 @@ const GlobalContext = createContext();
 
 const GlobalState = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
+  const [showModal, SetShowModal] = useState(false);
   return (
     <GlobalContext.Provider
-      value={{ basket: state.basket, user: state.user, dispatch }}
+      value={{ basket: state.basket, user: state.user, dispatch , showModal , SetShowModal  }}
     >
       {children}
     </GlobalContext.Provider>

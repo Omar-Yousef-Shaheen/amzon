@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/amzon/static/css/main.8d8da458.css",
-    "main.js": "/amzon/static/js/main.6e8ebd70.js",
+    "main.css": "/amzon/static/css/main.448c1122.css",
+    "main.js": "/amzon/static/js/main.a721ac4a.js",
     "static/media/2.png": "/amzon/static/media/2.0f5bc477d58244e1dbf1.png",
     "static/media/6.png": "/amzon/static/media/6.ff4f8692e4e7bb08800a.png",
     "static/media/BG.jpeg": "/amzon/static/media/BG.395025f504aa8ff58f06.jpeg",
@@ -15,11 +15,11 @@
     "static/media/checkoutAd.jpg": "/amzon/static/media/checkoutAd.b842b1e4bb0cc75ce652.jpg",
     "static/media/empty-cart.png": "/amzon/static/media/empty-cart.3fb2f85a27ef1e5245ad.png",
     "index.html": "/amzon/index.html",
-    "main.8d8da458.css.map": "/amzon/static/css/main.8d8da458.css.map",
-    "main.6e8ebd70.js.map": "/amzon/static/js/main.6e8ebd70.js.map"
+    "main.448c1122.css.map": "/amzon/static/css/main.448c1122.css.map",
+    "main.a721ac4a.js.map": "/amzon/static/js/main.a721ac4a.js.map"
   },
   "entrypoints": [
-    "static/css/main.8d8da458.css",
-    "static/js/main.6e8ebd70.js"
+    "static/css/main.448c1122.css",
+    "static/js/main.a721ac4a.js"
   ]
 }

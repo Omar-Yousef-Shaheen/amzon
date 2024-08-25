@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import CheckOutProduct from "./CheckOutProduct";
 import { NumericFormat } from "react-number-format";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import axios from "./axios";
 import { doc, setDoc } from "firebase/firestore";
 import { dataBase } from "../firebase";
+import axiosInstance from "./axios";
 
 const Payment = () => {
   const options = {
@@ -33,12 +33,12 @@ const Payment = () => {
   const elements = useElements();
   useEffect(() => {
     const getClientSecret = async () => {
-      const response = await axios({
-        method: "post",
-        url: `/payments/create?total=${getTotalPrice(basket) * 100} `,
-      });
+     try{
+      const response = await axiosInstance.post(`/payments/create?total=${getTotalPrice(basket) * 100} `);
       console.log(response.data);
-     
+     }catch (error){
+      console.log('Error' , error)
+     }
     };
     getClientSecret();
   }, [basket]);
@@ -47,7 +47,7 @@ const Payment = () => {
 
     setProcessing(true);
     const payload = await stripe
-      .confirmCardPayment(clientSecret, {
+      .confirmCardPayment("clientSecret", {
         payment_method: {
           card: elements.getElement(CardElement),
         },
